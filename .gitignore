@@ -1,0 +1,4 @@
+venv/
+notes.db
+app/__pycache__
+app/routes/__pycache__
