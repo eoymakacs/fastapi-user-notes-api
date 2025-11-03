@@ -94,6 +94,8 @@ http://127.0.0.1:8000/docs
 | POST   | `/notes/`     | Create a new note (protected) | ```json { "title": "My Note", "content": "Some text" }``` | ```json { "id": 1, "title": "My Note", "content": "Some text", "owner_id": 1 }``` |
 | GET    | `/notes/`     | Get all notes (protected) | N/A               | ```json [ { "id": 1, "title": "My Note", "content": "Some text", "owner_id": 1 } ]``` |
 
+All /notes endpoints require a JWT token (use the “Authorize” button in Swagger UI to paste the token).
+
 ---
 
 ## ⚙️ Environment Variables
