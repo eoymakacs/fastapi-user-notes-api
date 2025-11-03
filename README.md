@@ -19,6 +19,10 @@ A secure RESTful API built with **FastAPI** that allows users to register, log i
 - **FastAPI & Pydantic**
   - Input validation
   - Automatic OpenAPI docs
+- **JWT Authentication**
+  - Users log in with username/password
+  - Receive a JWT token to access protected routes (notes)
+  - Token-based authorization ensures users can only access their own notes
 
 ---
 
@@ -86,10 +90,19 @@ http://127.0.0.1:8000/docs
 | Method | Endpoint      | Description               | Request Body Example | Response Example |
 |--------|---------------|---------------------------|-------------------|----------------|
 | POST   | `/users/`     | Register a new user       | ```json { "username": "johndoe", "email": "john@example.com", "password": "secret123" }``` | ```json { "id": 1, "username": "johndoe", "email": "john@example.com" }``` |
-| POST   | `/notes/`     | Create a new note         | ```json { "title": "My First Note", "content": "This is a test note." }``` | ```json { "id": 1, "title": "My First Note", "content": "This is a test note.", "owner_id": 1 }``` |
-| GET    | `/notes/`     | Get all notes             | N/A               | ```json [ { "id": 1, "title": "My First Note", "content": "This is a test note.", "owner_id": 1 } ]``` |
+| POST   | `/users/login`| Login and get JWT token   | `x-www-form-urlencoded`: username=johndoe, password=secret123 | ```json { "access_token": "<jwt-token>", "token_type": "bearer" }``` |
+| POST   | `/notes/`     | Create a new note (protected) | ```json { "title": "My Note", "content": "Some text" }``` | ```json { "id": 1, "title": "My Note", "content": "Some text", "owner_id": 1 }``` |
+| GET    | `/notes/`     | Get all notes (protected) | N/A               | ```json [ { "id": 1, "title": "My Note", "content": "Some text", "owner_id": 1 } ]``` |
 
 ---
+
+## ⚙️ Environment Variables
+
+For production, you should set a secure `SECRET_KEY`:
+
+```bash
+export SECRET_KEY="your-super-secret-key"
+```
 
 ## 📈 Future Improvements
 
