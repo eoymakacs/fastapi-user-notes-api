@@ -79,5 +79,39 @@ uvicorn app.main:app --reload
 http://127.0.0.1:8000/docs
 ```
 
+---
 
-   
+## 🧪 Usage
+
+| Method | Endpoint      | Description               | Request Body Example | Response Example |
+|--------|---------------|---------------------------|-------------------|----------------|
+| POST   | `/users/`     | Register a new user       | ```json { "username": "johndoe", "email": "john@example.com", "password": "secret123" }``` | ```json { "id": 1, "username": "johndoe", "email": "john@example.com" }``` |
+| POST   | `/notes/`     | Create a new note         | ```json { "title": "My First Note", "content": "This is a test note." }``` | ```json { "id": 1, "title": "My First Note", "content": "This is a test note.", "owner_id": 1 }``` |
+| GET    | `/notes/`     | Get all notes             | N/A               | ```json [ { "id": 1, "title": "My First Note", "content": "This is a test note.", "owner_id": 1 } ]``` |
+
+---
+
+## 📈 Future Improvements
+
+- **JWT Authentication & Authorization**
+  - Implement login endpoint with JWT token generation
+  - Protect `/notes/` routes so users can only access their own notes
+- **Database Upgrade**
+  - Replace SQLite with PostgreSQL or MySQL for production-ready deployments
+  - Add database migrations using Alembic
+- **Enhanced CRUD Features**
+  - Allow updating and deleting notes with proper permission checks
+  - Implement pagination and search/filtering for notes
+- **Testing & CI/CD**
+  - Add unit and integration tests using `pytest`
+  - Set up GitHub Actions or other CI/CD pipelines for automated testing and deployment
+- **Dockerization & Deployment**
+  - Create Dockerfile and docker-compose setup
+  - Deploy the app to cloud platforms like **Render**, **Heroku**, or **AWS**
+- **API Documentation Enhancements**
+  - Improve OpenAPI docs with more examples and detailed descriptions
+  - Add API versioning for future compatibility
+- **Optional Features**
+  - Allow users to categorize notes or add tags
+  - Implement user profile management (avatars, bio, etc.)
+
